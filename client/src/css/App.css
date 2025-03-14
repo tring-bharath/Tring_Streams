@@ -40,7 +40,7 @@ h4
 {
   width: 100%;  
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: left;
   margin: 0px;
 }
 .sideImage

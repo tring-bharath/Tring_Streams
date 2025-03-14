@@ -6,9 +6,10 @@ import axios from "axios";
 import { Link, useAsyncError, useNavigate } from "react-router-dom";
 import { ProfileName } from "../../routes/AppRoutes";
 import { toast, ToastContainer } from "react-toastify";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";  
 
 const Login = () => {
+  const url = import.meta.env.VITE_API_URL;
   const [toggleEye, setToggleEye] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const { userName, setUsername } = useContext(ProfileName);
@@ -33,7 +34,7 @@ const Login = () => {
       console.log(user);
 
       const userLogin = await axios.post(
-        "https://nzqqkzs6-5000.inc1.devtunnels.ms/loginUser",
+        `${url}/loginUser`,
         user
       );
       console.log("userLogin:", userLogin);

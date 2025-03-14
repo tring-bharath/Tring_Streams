@@ -18,12 +18,7 @@
 {
   width: 100%;
 }
-.video-cards
-{
-  width: 100%;
-  justify-content: space-evenly;
-  gap:2%
-}
+
 .carousel-btn
 {
   background-color:#3948eb;
@@ -64,7 +59,7 @@
 }
 .carousel-container
 {
-  width: 95%;
+  width: 94%;
 }
 /* @media (max-width: 768px) {
   .carousel-container {

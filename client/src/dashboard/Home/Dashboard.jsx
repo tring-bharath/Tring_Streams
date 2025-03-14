@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useAsyncError, useNavigate, useSearchParams } from 'react-router-dom';
 import '../../css/Dashboard.css'
 import Carousel from 'react-bootstrap/Carousel';
 import VideoCard from '../../components/VideoStreamingApp';
@@ -10,17 +10,21 @@ import History from './history';
 import { ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
+  const url = import.meta.env.VITE_API_URL;
   const [page,setPage]=useState(1);
   const [hasMore, setHasMore] = useState(true);
   const nav=useNavigate();
-  const url = "https://nzqqkzs6-5000.inc1.devtunnels.ms/getAllVideos";//https://pixabay.com/api/videos/?key=49160670-8b09c7d4f9c7bed1e8a624b6b&q=nature
+  // const url = "https://nzqqkzs6-5000.inc1.devtunnels.ms/getAllVideos";//https://pixabay.com/api/videos/?key=49160670-8b09c7d4f9c7bed1e8a624b6b&q=nature
 
   const [videos, setVideos] = useState([]);
+  const [carousel,setCarousel]=useState([]);
   const apicall =async () => {
     try {
-      const res = await axios.get(`${url}?page=${page}`);
+      const res = await axios.get(`${url}/getAllVideos?page=${page}`);
+      const carouselData=await axios.get(`${url}/carousel`)
       const data = res.data;
-
+      
+      setCarousel(carouselData.data);
       if (data.length < 20) setHasMore(false);
 
       setVideos((prev) => [...prev, ...data]);
@@ -43,7 +47,7 @@ const Dashboard = () => {
     <div className="carousel-container">
       <ToastContainer/>
       <Carousel wrap={true} interval={2000} className='mb-3'>
-        {videos.map((video) => (
+        {carousel?.map((video) => (
           <Carousel.Item>
             <img
               src={video?.thumbnail}
@@ -67,7 +71,9 @@ const Dashboard = () => {
       loader={<h4>Loading Videos</h4>}
       className='infinite-scroll'
       >
-      <div className='d-flex flex-wrap video-cards'>
+        <h1 className='ms-3'>All Videos</h1>
+      <div className='d-flex flex-wrap video-cards justify-content-center'>
+        
         {videos.map((video) => (<VideoCard video={video} />))}
       </div>
       </InfiniteScroll>

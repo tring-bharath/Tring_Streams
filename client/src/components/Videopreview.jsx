@@ -6,15 +6,15 @@ import axios from 'axios'
 import ReactPlayer from 'react-player'
 
 const Videopreview = () => {
+  const api_url = import.meta.env.VITE_API_URL;
   const [hover, setHover] = useState(false);
   const location = useLocation();
   const video=location.state;
   
   let userId = JSON.parse(localStorage.getItem("id"));
-  console.log(userId);
-  
+  console.log(video);
+  axios.put(`${api_url}/updateViews/${userId}`)
   const newVideo={...video,userId:userId};
-  console.log("new",newVideo);
   axios.post("https://nzqqkzs6-5000.inc1.devtunnels.ms/insertHistory",newVideo)
   .then((res)=>console.log("res",res))
   .catch((err) => console.log(err)
@@ -27,7 +27,6 @@ const Videopreview = () => {
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
-        console.log(videos);
       })
 
 

@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors=require('cors');
+require('dotenv').config();
 const { ObjectId } = require('mongodb');
 const app = express();
 app.use(bodyParser.json());
@@ -251,7 +252,28 @@ app.get('/getAllVideos',async (req,res)=>
         res.status(500).send({message:err.message})
     }
 })
-
+app.put('/updateViews/:videoId',async(req,res)=>
+{
+    const id=req.params.videoId;
+    try{
+        const video = await AllModel.findByIdAndUpdate(id,{ $inc: { views: 1 }});
+        res.status(203).send(video);
+    }
+    catch(err)
+    {
+        res.status(470).send(err.message);
+    }
+})
+app.get('/carousel',async(req,res)=>
+{
+    try{
+        const video=await AllModel.find().sort({views:-1}).limit(10);
+        res.status(200).send(video);
+    }
+    catch(err){
+        res.status(401).send({message:"Error in Carousel"});
+    }
+})
 app.get("/search", async (req, res) => {
     try {
       const { tag } = req.query;

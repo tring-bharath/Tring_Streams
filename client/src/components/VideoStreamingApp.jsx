@@ -7,6 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const VideoCard = ({ video }) => {
+  const url = import.meta.env.VITE_API_URL;
   const [hover, setHover] = useState(false);
   const nav = useNavigate();
 
@@ -21,7 +22,7 @@ const VideoCard = ({ video }) => {
     console.log(userId);
     const newVideo = { ...video, userId: userId };
     console.log(newVideo);
-    await axios.post("https://nzqqkzs6-5000.inc1.devtunnels.ms/insert", newVideo)
+    await axios.post(`${url}/insert`, newVideo)
       .then((res) => toast.success("Video added to Watch List"))
       .catch((err) => toast.error("Already in the watchList"))
   }

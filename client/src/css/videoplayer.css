@@ -7,7 +7,7 @@
 .video-cards
 {
   width: 100%;
-  justify-content: space-evenly;
+  justify-content:left;
   gap:2%;
   scrollbar-width: none;
 }

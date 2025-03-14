@@ -8,6 +8,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 
 export default function Signup() {
+  const url = import.meta.env.VITE_API_URL;
     const [toggleEye,setToggleEye]=useState(false);
     const [passwordType,setPasswordType]=useState("password");
   const schema = yup.object().shape({
@@ -30,7 +31,7 @@ export default function Signup() {
   const onSubmit = async (data) => {
     console.log(data);
     try{
-      const user=await axios.post("https://nzqqkzs6-5000.inc1.devtunnels.ms/registerUser",data);
+      const user=await axios.post(`${url}/registerUser`,data);
       console.log(user);
       nav('/Registration')
     }
