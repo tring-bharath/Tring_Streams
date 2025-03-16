@@ -13,11 +13,6 @@ app.use(cors());
 
 connectDB();
 
-// Add a test route to verify server is running
-app.get("/", (req, res) => {
-  res.send("Server is running!");
-});
-
 app.use("/user", userRoutes);
 app.use("/video", videoRoutes);
 

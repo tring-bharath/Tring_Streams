@@ -12,8 +12,8 @@ export default function Signup() {
     const [toggleEye,setToggleEye]=useState(false);
     const [passwordType,setPasswordType]=useState("password");
   const schema = yup.object().shape({
-    first_name: yup.string().required("First name is required"),
-    last_name: yup.string(),
+    firstName: yup.string().required("First name is required"),
+    lastName: yup.string(),
     email: yup.string().email().required(),
     password: yup.string().min(8).required(),
     terms: yup.bool().oneOf([true], "You must accept the terms and conditions"),
@@ -60,18 +60,18 @@ export default function Signup() {
         <h3 className="text-center">Sign-Up</h3>
         <label className="mt-2">First Name*</label>
         <input
-          {...register("first_name")}
+          {...register("firstName")}
           className="form-control"
           placeholder="First Name"
         />
-        <p className="text-danger">{errors.first_name?.message}</p>
+        <p className="text-danger">{errors.firstName?.message}</p>
         <label className="mt-2">Last Name:</label>
         <input
-          {...register("last_name")}
+          {...register("lastName")}
           className="form-control"
           placeholder="Last Name"
         />
-        <p className="text-danger">{errors.last_name?.message}</p>
+        <p className="text-danger">{errors.lastName?.message}</p>
         <label className="mt-2">Email*</label>
         <input
           {...register("email")}

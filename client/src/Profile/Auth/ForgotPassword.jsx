@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { ToastContainer } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -14,8 +14,15 @@ const ForgotPassword = () => {
     const [otp, setOtp] = useState();
     const sendOtp = async(e) => {
         e.preventDefault();
-        await axios.post(`${url}/user/sendOtp`, { email: inputEmail });
-        setOtpSend(true);
+        try{
+            const response=await axios.post(`${url}/user/sendOtp`, { email: inputEmail });
+            console.log(response);
+            setOtpSend(true);
+        }
+        catch(error){
+            console.log(error);
+            toast.error("Email not found"); 
+        }
     }
     const checkOtp = async(e) => {
         const email = inputEmail;

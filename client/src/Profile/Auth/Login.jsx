@@ -39,23 +39,23 @@ const Login = () => {
       );
       console.log("userLogin:", userLogin);
 
-      console.log("userName",userLogin.data.first_name);
+      console.log("userName",userLogin.data.firstName);
 
-      const username = userLogin.data.first_name;
+      const username = userLogin.data.firstName;
       const userId = userLogin.data._id;
+      const email = userLogin.data.email;
       if (userLogin?.data == "WrongPassword") {
         toast.error("Invalid Credentials");
         return;
       }
       localStorage.setItem("user",JSON.stringify(username));
       localStorage.setItem("id",JSON.stringify(userId));
+      localStorage.setItem("email",JSON.stringify(email));
       setUsername(username);
       console.log(userName);
 
       nav("/");
     } catch (error) {
-      console.log(error);
-
       toast.error("Email Address not Registered");
     }
   };

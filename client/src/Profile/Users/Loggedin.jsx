@@ -1,22 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProfileName } from "../../routes/AppRoutes";
 import { Button, Modal, Form } from "react-bootstrap";
 import image from '../../assets/front_image.jpg';
+import axios from "axios";
 
 const Loggedin = () => {
+  const url=import.meta.env.VITE_API_URL;
   const [show, setShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    gender: "",
-    dateOfBirth: "",
-    bio: "",
-    location: "",
-  });
+  const email=JSON.parse(localStorage.getItem("email"));
+  const [formData, setFormData] = useState({email});
   const { userName, setUsername } = useContext(ProfileName);
+  
+  const apiCall = async () => {
+    console.log({ email });
 
+    const response = await axios.post(`${url}/user/getUser`, { email }).then((res) => setFormData(res.data));
+  };
+  useEffect(() => { apiCall(); }, []);
+  useEffect(() => { console.log(formData);
+  ; }, [formData]);
   const logout = () => {
     localStorage.clear("User");
     setUsername(null);
@@ -29,8 +32,22 @@ const Loggedin = () => {
 
   const handleEditSubmit = () => {
     console.log("Updated Profile Data:", formData);
+    try{
+    const res=axios.post(`${url}/user/updateUser`,  formData )
+    }
+    catch(error){
+        console.log(error);
+    }
     setEditShow(false);
   };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setFormData({ ...formData, ProfilePicture: imageUrl });
+    }
+  }
 
   return (
     <div className="w-100">
@@ -52,12 +69,20 @@ const Loggedin = () => {
           </Modal.Footer>
         </Modal>
 
-        <Modal show={editShow} centered onHide={() => setEditShow(false)}>
+        <Modal show={editShow} fullscreen onHide={() => setEditShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Profile</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
+              <Form.Group className="mb-3">
+                <Form.Label><img src={formData?.ProfilePicture} className="rounded-circle" style={{width:"350px"}}/></Form.Label>
+                <Form.Control
+                  type="file"
+                  name="profile"
+                  onChange={handleImageChange}
+                />
+              </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
@@ -141,15 +166,16 @@ const Loggedin = () => {
             </div>
           </div>
           <div className="profile-body ps-4 d-flex flex-column w-100">
-            <div className="card shadow-lg p-4 text-center" style={{ width: "350px" }}>
+            <div className="card shadow-lg p-4 text-start" style={{ width: "350px" }}>
               <img
-                src={image}
+                src={formData?.ProfilePicture}
                 alt="Profile"
                 className="rounded-circle mb-3"
                 style={{ width: "120px", height: "120px", objectFit: "cover" }}
               />
               <h3>{userName}</h3>
-              <p className="text-muted">Your email or other info</p>
+              <h6 className="text-muted">Mail:{formData?.email}</h6>
+              <h6 className="text-muted">Contact:{formData?.phoneNumber}</h6>
               <button className="btn btn-primary w-100" onClick={() => setEditShow(true)}>Edit Profile</button>
             </div>
           </div>
