@@ -13,10 +13,15 @@ const History = () => {
     console.log(`${url}/history/${userId}`);
     
     const showCards = async () => {
-      const res = await axios.get(`${url}/history/${userId}`)
+      const res = await axios.get(`${url}/video/history/${userId}`);
       setVideos(res.data);
     }
   
+    const remove = async (video) => {
+      const deletedVideo = await axios.delete(`${url}/video/removeFromHistory/${video._id}`);
+      showCards();
+    };
+
     useEffect(() => {
       showCards();
     }, [])

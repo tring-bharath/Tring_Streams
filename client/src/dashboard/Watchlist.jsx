@@ -11,7 +11,7 @@ const Watchlist = () => {
   const userId=JSON.parse(localStorage.getItem("id"));
   
   const showCards = async () => {
-    const res = await axios.get(`${url}/watchList/${userId}`)//http://localhost:5000/watchList
+    const res = await axios.get(`${url}/video/watchList/${userId}`)
     setVideos(res.data)
     console.log(res.data);
     
@@ -33,20 +33,19 @@ const Watchlist = () => {
       </div>
     </div>
     :
-        <div className="userUnavailable w-100 d-flex justify-content-center align-items-center h3 h-100  ">
-          Login to save and watch videos
-        </div>
+        <div className="userUnavailable w-100 d-flex justify-content-center align-items-center h3 h-100  "> Login to save and watch videos </div>
 }
     </div>
   )
 }
 
 const WatchListCard = ({ video, showCards }) => {
+  const url = import.meta.env.VITE_API_URL;
   const nav = useNavigate();
   const [hover, setHover] = useState(false);
 
   const remove = async (video) => {
-    const deletedVideo = await axios.delete(`${url}/removeFromWatchList/${video._id}`)//http://localhost:5000/removeFromWatchList/${video._id}
+    const deletedVideo = await axios.delete(`${url}/video/removeFromWatchList/${video._id}`)
     showCards();
   }
 

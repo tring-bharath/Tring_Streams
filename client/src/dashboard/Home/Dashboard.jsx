@@ -18,10 +18,10 @@ const Dashboard = () => {
 
   const [videos, setVideos] = useState([]);
   const [carousel,setCarousel]=useState([]);
-  const apicall =async () => {
+  const apicall = async () => {
     try {
-      const res = await axios.get(`${url}/getAllVideos?page=${page}`);
-      const carouselData=await axios.get(`${url}/carousel`)
+      const res = await axios.get(`${url}/video/getAllVideos?page=${page}`);
+      const carouselData = await axios.get(`${url}/video/carousel`);
       const data = res.data;
       
       setCarousel(carouselData.data);

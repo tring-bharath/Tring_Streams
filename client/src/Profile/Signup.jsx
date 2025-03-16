@@ -31,12 +31,14 @@ export default function Signup() {
   const onSubmit = async (data) => {
     console.log(data);
     try{
-      const user=await axios.post(`${url}/registerUser`,data);
+      const user=await axios.post(`${url}/user/registerUser`,data);
       console.log(user);
       nav('/Registration')
     }
     catch (error) 
     {
+      console.log(error);
+      
       toast.error("Email already Exists")
     }
   };

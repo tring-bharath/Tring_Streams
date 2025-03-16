@@ -12,9 +12,8 @@ const Profile = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-
   return (
-    <div className='d-flex justify-content-center align-items-center w-100'>
+    <div className='d-flex w-100'>
       {user == null ?
         <Loggedout/>
         :

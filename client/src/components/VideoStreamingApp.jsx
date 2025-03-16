@@ -22,7 +22,7 @@ const VideoCard = ({ video }) => {
     console.log(userId);
     const newVideo = { ...video, userId: userId };
     console.log(newVideo);
-    await axios.post(`${url}/insert`, newVideo)
+    await axios.post(`${url}/video/insert`, newVideo)
       .then((res) => toast.success("Video added to Watch List"))
       .catch((err) => toast.error("Already in the watchList"))
   }

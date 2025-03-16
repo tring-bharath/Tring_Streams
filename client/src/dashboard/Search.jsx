@@ -13,13 +13,11 @@ const Search = () => {
 
   const [videos, setVideos] = useState([]);
   const apicall = () => {
-    fetch(`${url}/search?tag=${search}`)
+    fetch(`${url}/video/search?tag=${search}`)
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
-      })
-
-
+      });
   }
   useEffect(() => {
     apicall();

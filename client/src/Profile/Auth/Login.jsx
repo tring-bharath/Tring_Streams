@@ -34,7 +34,7 @@ const Login = () => {
       console.log(user);
 
       const userLogin = await axios.post(
-        `${url}/loginUser`,
+        `${url}/user/loginUser`,
         user
       );
       console.log("userLogin:", userLogin);

@@ -10,6 +10,7 @@ import Signup from '../Profile/signup'
 import Dashboard from '../dashboard/Home/Dashboard'
 import Videopreview from '../components/Videopreview'
 import ForgotPassword from '../Profile/Auth/ForgotPassword'
+import ResetPassword from '../Profile/Auth/ResetPassword'
 
 
 export const ProfileName=createContext();
@@ -32,6 +33,7 @@ const AppRoutes = () => {
           
       </Route>
       <Route path='/forgotpassword' element={<ForgotPassword/>}/>
+      <Route path='/resetpassword' element={<ResetPassword/>}/>
       <Route path='/videoPlayer' element={<Videopreview/>}/>
       </Routes>
     </BrowserRouter>

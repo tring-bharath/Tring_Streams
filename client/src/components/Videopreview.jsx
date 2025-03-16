@@ -13,13 +13,13 @@ const Videopreview = () => {
   
   let userId = JSON.parse(localStorage.getItem("id"));
   console.log(video);
-  axios.put(`${api_url}/updateViews/${userId}`)
+  axios.put(`${api_url}/video/updateViews/${userId}`)
   const newVideo={...video,userId:userId};
-  axios.post("https://nzqqkzs6-5000.inc1.devtunnels.ms/insertHistory",newVideo)
+  axios.post(`${api_url}/video/insertHistory`,newVideo)
   .then((res)=>console.log("res",res))
   .catch((err) => console.log(err)
   );
-  const url = `http://localhost:5000/search?tag=${video.tags?.split(",")[0]}`;
+  const url = `${api_url}/video/search?tag=${video.tags?.split(",")[0]}`;
   const navigate=useNavigate();
   const [videos, setVideos] = useState([]);
   const apicall = () => {
