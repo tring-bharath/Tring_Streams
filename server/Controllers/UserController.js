@@ -37,13 +37,11 @@ const sendOtp = async (req, res) => {
   
   const existingUser = await userModel.findOne({ email });
     if (!existingUser) {
-      console.log("Email doesn't exists");
       return res.status(400).json({ message: "Email doesn't exists" });
     }
     let otp =await Math.floor(Math.random().toFixed(4) * 10000);
     let UserOtp=new otpModel({email,otp});
     UserOtp.save();
-    console.log(UserOtp)
     try{
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -89,7 +87,6 @@ const checkOtp = async (req, res) => {
   const otp_email=existingUser.email;
   const result=await otpModel.findOne({email:otp_email});
   const send_otp=result.otp;
-  console.log(otp," ",send_otp);
   if (otp == send_otp) {
     
     return res.status(200).send("OTP verified");

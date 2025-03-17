@@ -111,7 +111,6 @@ const updateViews = async (req, res) => {
 const getCarousel = async (req, res) => {
   try {
     const video = await AllModel.find().sort({ views: -1 }).limit(10);
-    console.log(video);
     
     res.status(200).send(video);
   } catch (err) {
