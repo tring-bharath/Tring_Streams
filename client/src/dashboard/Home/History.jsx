@@ -10,11 +10,16 @@ const History = () => {
       const { userName, setUsername } = useContext(ProfileName);
     const [videos, setVideos] = useState([]);
   const userId =JSON.parse( localStorage.getItem("id"));
-    console.log(`${url}/history/${userId}`);
     
     const showCards = async () => {
+      try{
       const res = await axios.get(`${url}/video/history/${userId}`);
       setVideos(res.data);
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
     }
   
     const remove = async (video) => {
@@ -27,9 +32,9 @@ const History = () => {
     }, [])
   return (
     <div className='history-container'>
-        {videos.length&&<h1 className='ms-3'>History</h1>}
+        {videos.length!=0&&<h1 className='ms-3'>History</h1>}
       <div className='px-3 mt-1 history-cards'>
-            {videos?.map((video) => (<HistoryCard video={video} showCards={showCards}/>))}{/* */}
+            {videos?.map((video) => (<HistoryCard video={video} showCards={showCards}/>))}
           </div>
     </div>
   )

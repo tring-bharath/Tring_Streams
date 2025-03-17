@@ -37,9 +37,6 @@ const Login = () => {
         `${url}/user/loginUser`,
         user
       );
-      console.log("userLogin:", userLogin);
-
-      console.log("userName",userLogin.data.firstName);
 
       const username = userLogin.data.firstName;
       const userId = userLogin.data._id;
@@ -69,7 +66,7 @@ const Login = () => {
     <div>
       <ToastContainer />
       <form
-        className="form-container d-flex flex-column container"
+        className="form-container d-flex flex-column container justify-content-center"
         onSubmit={handleSubmit(onSubmit)}
       >
         <h3 className="text-center">Login</h3>
@@ -79,6 +76,8 @@ const Login = () => {
             className="form-control border-success"
             type="email"
             {...register("email")}
+            onChange={(e)=>{setEmail(e.target.value);
+            }}
           />
         </div>
         <p className="text-danger">{errors.email?.message}</p>

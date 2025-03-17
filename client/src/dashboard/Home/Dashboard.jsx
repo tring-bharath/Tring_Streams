@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useAsyncError, useNavigate, useSearchParams } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import '../../css/Dashboard.css'
 import Carousel from 'react-bootstrap/Carousel';
-import VideoCard from '../../components/VideoStreamingApp';
+import VideoCard from '../../components/VideoCard';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { datalist } from 'framer-motion/client';
 import History from './history';
-import { ToastContainer } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
   const url = import.meta.env.VITE_API_URL;
   const [page,setPage]=useState(1);
   const [hasMore, setHasMore] = useState(true);
   const nav=useNavigate();
-  // const url = "https://nzqqkzs6-5000.inc1.devtunnels.ms/getAllVideos";//https://pixabay.com/api/videos/?key=49160670-8b09c7d4f9c7bed1e8a624b6b&q=nature
-
   const [videos, setVideos] = useState([]);
   const [carousel,setCarousel]=useState([]);
   const apicall = async () => {

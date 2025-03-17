@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../css/videoplayer.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import VideoCard from './VideoStreamingApp'
+import VideoCard from './VideoCard'
 import axios from 'axios'
 import ReactPlayer from 'react-player'
 
@@ -13,7 +13,7 @@ const Videopreview = () => {
   
   let userId = JSON.parse(localStorage.getItem("id"));
   console.log(video);
-  axios.put(`${api_url}/video/updateViews/${userId}`)
+  axios.put(`${api_url}/video/updateViews/${video.id}`)
   const newVideo={...video,userId:userId};
   axios.post(`${api_url}/video/insertHistory`,newVideo)
   .then((res)=>console.log("res",res))
@@ -49,7 +49,7 @@ const Videopreview = () => {
         <h2 className='p-4 ps-5 ms-2 '>More like this ...</h2>
         <button className='m-4 px-3 rounded-2 h6' onClick={()=>navToHome()}>Back to home</button>
       </div>
-      <div className='d-flex flex-wrap video-cards align-items-center align-self-center justify-content-center'>
+      <div className='d-flex flex-wrap video-cards align-items-center align-self-center justify-content-start ps-3'>
         {videos?.map((video) =>
         (<VideoCard video={video} />
         ))}

@@ -76,7 +76,7 @@ const Loggedin = () => {
           <Modal.Body>
             <Form>
               <Form.Group className="mb-3">
-                <Form.Label><img src={formData?.ProfilePicture} className="rounded-circle" style={{width:"350px"}}/></Form.Label>
+                <Form.Label><img src={formData?.ProfilePicture} className="rounded-circle" style={{width:"150px"}}/></Form.Label>
                 <Form.Control
                   type="file"
                   name="profile"
@@ -112,11 +112,21 @@ const Loggedin = () => {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Gender</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleEditChange}
+                <Form.Check 
+                type="radio"
+                name="gender"
+                value="Male"
+                label="Male"
+                checked={formData.gender=="Male"}
+                onChange={handleEditChange}
+                />
+                <Form.Check 
+                type="radio"
+                name="gender"
+                value="Female"
+                label="Female"
+                checked={formData.gender=="Female"}
+                onChange={handleEditChange}
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -169,13 +179,13 @@ const Loggedin = () => {
             <div className="card shadow-lg p-4 text-start" style={{ width: "350px" }}>
               <img
                 src={formData?.ProfilePicture}
-                alt="Profile"
-                className="rounded-circle mb-3"
+                alt={""}
+                className="rounded-circle mb-3 h5 display-5 bg-primary text-white"
                 style={{ width: "120px", height: "120px", objectFit: "cover" }}
               />
               <h3>{userName}</h3>
-              <h6 className="text-muted">Mail:{formData?.email}</h6>
-              <h6 className="text-muted">Contact:{formData?.phoneNumber}</h6>
+              <h6 className="text-muted">{formData.email&&<div>Mail:{formData?.email}</div>}</h6>
+              <h6 className="text-muted">{formData.phoneNumber&&<div>Contact:{formData?.phoneNumber}</div>}</h6>
               <button className="btn btn-primary w-100" onClick={() => setEditShow(true)}>Edit Profile</button>
             </div>
           </div>

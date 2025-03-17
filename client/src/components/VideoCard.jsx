@@ -5,17 +5,24 @@ import { useNavigate } from "react-router-dom";
 import '../css/VideoCard.css'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button, Modal } from "react-bootstrap";
 
 const VideoCard = ({ video }) => {
   const url = import.meta.env.VITE_API_URL;
   const [hover, setHover] = useState(false);
+  const [show,setShow]=useState(false);
   const nav = useNavigate();
 
-
+  const user = localStorage.getItem("user");
   const watchNow = async () => {
-    console.log("history");
-    nav("/videoplayer", { state: video })
-    window.scrollTo(0, 0);
+    if(user)
+    {
+      nav("/videoplayer", { state: video })
+      window.scrollTo(0, 0);
+    }
+    else{
+      setShow(true);
+    }
   }
   const watchList = async (video) => {
     const userId =JSON.parse(localStorage.getItem("id")) ;
@@ -26,7 +33,12 @@ const VideoCard = ({ video }) => {
       .then((res) => toast.success("Video added to Watch List"))
       .catch((err) => toast.error("Already in the watchList"))
   }
-  const user = localStorage.getItem("user");
+
+  const setLogin=()=>
+  {
+    nav('/registration');
+  }
+  
   return (
     <div className="video-card rounded-1 pb-2"
       onMouseEnter={() => setHover(true)}
@@ -51,7 +63,18 @@ const VideoCard = ({ video }) => {
           </div>
         </div>
       </div>
-
+      <Modal show={show} onHide={()=>setShow(false)}>
+          <Modal.Header closeButton>
+            Login!
+          </Modal.Header>
+          <Modal.Body>
+            You are not Logged in 
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={()=>setShow(false)}>Close</Button>
+            <Button variant="primary" onClick={()=>setLogin()}>Login</Button>
+          </Modal.Footer>
+      </Modal>
 
     </div>
   );

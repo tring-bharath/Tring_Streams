@@ -11,5 +11,7 @@ const userSchema = new mongoose.Schema({
     bio:{type:String},
     location:{type:String}
 });
-const userModal=mongoose.model("user",userSchema);
-module.exports=userModal;
+
+const userModel=mongoose.model("user",userSchema);
+
+module.exports=userModel;

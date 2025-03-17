@@ -99,9 +99,9 @@ const getAllVideos = async (req, res) => {
 };
 
 const updateViews = async (req, res) => {
-  const id = req.params.videoId;
+  const id = parseInt(req.params.videoId);
   try {
-    const video = await AllModel.findByIdAndUpdate(id, { $inc: { views: 1 } });
+    const video = await AllModel.findOneAndUpdate({id:id}, { $inc: { views: 1 } });
     res.status(200).send(video);
   } catch (err) {
     res.status(500).send(err.message);
