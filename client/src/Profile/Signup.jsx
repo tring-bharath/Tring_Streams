@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Toaster, toast } from "sonner";
 import * as yup from "yup";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Signup() {
   const url = import.meta.env.VITE_API_URL;
@@ -53,7 +53,7 @@ export default function Signup() {
 
   return (
     <>
-      <Toaster />
+      <ToastContainer />
       <form
         className="form-container d-flex flex-column container"
         onSubmit={handleSubmit(onSubmit)}>

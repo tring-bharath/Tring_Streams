@@ -5,8 +5,8 @@ import Carousel from "react-bootstrap/Carousel";
 import VideoCard from "../../components/VideoCard";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import History from "./history";
-import { toast, ToastContainer } from "react-toastify";
+import History from "./History";
+import {  ToastContainer } from "react-toastify";
 
 const Dashboard = () => {
   const url = import.meta.env.VITE_API_URL;
@@ -63,7 +63,8 @@ const Dashboard = () => {
         next={apicall}
         hasMore={hasMore}
         loader={<h4>Loading Videos</h4>}
-        className="infinite-scroll">
+        className="infinite-scroll"
+      >
         <h1 className="ms-3">All Videos</h1>
         <div className="d-flex flex-wrap video-cards justify-content-center">
           {videos.map((video) => (

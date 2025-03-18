@@ -7,12 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { ProfileName } from "../../routes/AppRoutes";
 import { toast, ToastContainer } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import '../../css/index.css'
 
 const Login = () => {
   const url = import.meta.env.VITE_API_URL;
   const [toggleEye, setToggleEye] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
-  const { userName, setUsername } = useContext(ProfileName);
+  const { setUsername } = useContext(ProfileName);
   const [email, setEmail] = useState();
 
   const nav = useNavigate();

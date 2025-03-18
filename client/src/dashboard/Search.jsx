@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaEye, FaHeart, FaSearch, FaUser } from "react-icons/fa";
 import VideoCard from "../components/VideoCard";
 import "../css/videoplayer.css";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -25,6 +25,7 @@ const Search = () => {
   }, [search]);
   return (
     <div className=" d-flex flex-column align-items-center w-100">
+      <ToastContainer/>
       <div className="search d-flex justify-content-center w-100">
         <FaSearch className="search-icon align-self-center" size={30} />
         <input
@@ -34,7 +35,7 @@ const Search = () => {
           onChange={(e) => setSearch(e.target.value.trim(" "))}
         />
       </div>
-      <div className="d-flex flex-wrap video-cards w-100 ms-3 mb-3">
+      <div className="d-flex flex-wrap video-cards w-100 ps-3 mb-3">
         {videos?.map((video) => (
           <VideoCard video={video} />
         ))}

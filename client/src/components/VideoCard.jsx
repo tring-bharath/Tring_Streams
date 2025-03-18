@@ -3,7 +3,7 @@ import axios from "axios";
 import { FaBookmark, FaEye, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "../css/VideoCard.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, Modal } from "react-bootstrap";
 

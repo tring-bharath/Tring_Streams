@@ -1,5 +1,4 @@
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -8,8 +7,8 @@ const connectDB = require("./config/db");
 const userRoutes = require("./Routes/UserRoute");
 const videoRoutes = require("./Routes/VideoRoute");
 
-app.use(bodyParser.json());
-app.use(cors());
+app.use(express.json());
+app.use(cors({origin:['http://localhost:5173']}));
 
 connectDB();
 

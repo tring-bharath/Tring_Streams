@@ -1,6 +1,9 @@
 const userModel = require("../Schema/UserSchema");
 const otpModel = require("../Schema/OtpSchema");
 const nodemailer = require("nodemailer");
+const jwt = require('jsonwebtoken');
+const secretKey = process.env.secretKey;
+
 
 
 const registerUser = async (req, res) => {
@@ -23,6 +26,10 @@ const loginUser = async (req, res) => {
   try {
     const user = await userModel.findOne({ email });
     if (user.password === password) {
+      
+      // const token = jwt.sign({user}, secretKey, { expiresIn: '1d' });
+      
+      // console.log(token);
       res.status(200).send(user);
     } else {
       res.status(200).send("WrongPassword");

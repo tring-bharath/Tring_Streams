@@ -33,10 +33,10 @@ const HistoryCard = ({ video, showCards }) => {
         </h5>
         <div className="video-stats mb-2 d-flex align-items-center">
           {/* <span className="fw-semibold me-2">
-            <FaHeart size={12} className="text-danger" /> {video.likes}{" "}
+            <FaHeart size={12} className="text-danger" /> {video.likes}
           </span> */}
           <span className="fw-semibold me-3">
-            <FaEye size={13} className="" /> {video.views}
+            <FaEye size={13} className="text-primary" /> {video.views}
           </span>
           <button
             className="add-watchlist btn bg-danger text-white fw-semibold"
